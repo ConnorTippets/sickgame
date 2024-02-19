@@ -66,8 +66,8 @@ function draw() {
 	
 	//world Z height
 	var wz = [];
-	wz.push(0 - player.z);
-	wz.push(0 - player.z);
+	wz.push(0 - player.z + ((player.l*wy[0])/32));
+	wz.push(0 - player.z + ((player.l*wy[1])/32));
 	
 	//screen x and screen y position
 	var sx = [], sy = [];
