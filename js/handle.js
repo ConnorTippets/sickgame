@@ -2,7 +2,7 @@ var ctx, username;
 var start, prev;
 var x = 0;
 var width, height;
-var keys = [];
+var keys = {};
 
 function init(username, cont) {
 	ctx = cont;

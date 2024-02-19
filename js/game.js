@@ -16,7 +16,7 @@ function handle(delta) {
 	
 	for (i = 0; i < 10; i ++) {
 		var key = ["W", "A", "S", "D", "SPACE", "SHIFT", "LEFT", "UP", "RIGHT", "DOWN"][i];
-		keys[key] = kd[key].isDown();
+		keys[key] = kd[key].isDown() && !(document.pointerLockElement == null);
 	};
 	
 	var turning = (keys["RIGHT"] - keys["LEFT"]) * turn;
