@@ -1,18 +1,8 @@
 var ctx, username;
 var start, prev;
 var x = 0;
-var keys = [];
 var width, height;
-
-document.onkeydown = (event) => {
-	if (keys.indexOf(event.key) < 0 && document.pointerLockElement) {
-		keys.push(event.key);
-	};
-};
-
-document.onkeyup = (event) => {
-	keys.splice(keys.indexOf(event.key), 1);
-}
+var keys = [];
 
 function init(username, cont) {
 	ctx = cont;
@@ -43,6 +33,7 @@ function main() {
 	width = window.innerWidth / 8
 	height = window.innerHeight / 8;
 	
+	kd.tick();
 	step(delta, username);
 	
 	prev = now

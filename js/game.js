@@ -13,53 +13,37 @@ class Player {
 function handle(delta) {
 	const turn = 2;
 	const walk = 4;
-	if (keys.includes("ArrowLeft")) {
-		player.a -= turn;
-		if (player.a < 0) {
-			player.a += 360;
-		}
+	
+	for (i = 0; i < 10; i ++) {
+		var key = ["W", "A", "S", "D", "SPACE", "SHIFT", "LEFT", "UP", "RIGHT", "DOWN"][i];
+		keys[key] = kd[key].isDown();
+	};
+	
+	var turning = (keys["RIGHT"] - keys["LEFT"]) * turn;
+	var looking = (keys["UP"] - keys["DOWN"]) * turn;
+	var flying = (keys["SPACE"] - keys["SHIFT"]) * walk;
+	var moving = (keys["W"] - keys["S"]);
+	var strafing = (keys["A"] - keys["D"]);
+	
+	player.a += turning;
+	if (player.a < 0) {
+		player.a += 360;
 	}
-	else if (keys.includes("ArrowRight")) {
-		player.a += turn;
-		if (player.a > 359) {
-			player.a -= 360;
-		}
+	else if (player.a > 359) {
+		player.a -= 360;
 	}
 	
 	var dx = sinA[Math.floor(player.a)]*walk;
 	var dy = cosA[Math.floor(player.a)]*walk;
+	player.x += dx * moving;
+	player.y += dy * moving;
 	
-	if (keys.includes("w")) {
-		player.x += dx;
-		player.y += dy;
-	}
-	else if (keys.includes("s")) {
-		player.x -= dx;
-		player.y -= dy;
-	};
+	player.x += dx * strafing;
+	player.y -= dy * strafing;
 	
-	if (keys.includes("a")) {
-		player.x += dx;
-		player.y -= dy;
-	}
-	else if (keys.includes("d")) {
-		player.x -= dx;
-		player.y += dy;
-	};
+	player.l += looking;
 	
-	if (keys.includes("ArrowUp")) {
-		player.l -= walk;
-	}
-	else if (keys.includes("ArrowDown")) {
-		player.l += walk;
-	};
-	
-	if (keys.includes(" ")) {
-		player.z -= walk;
-	}
-	else if (keys.includes("Shift")) {
-		player.z += walk;
-	};
+	player.z -= flying;
 };
 
 function draw() {
